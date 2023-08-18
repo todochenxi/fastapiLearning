@@ -3,25 +3,27 @@
 # @Author  : chenxi
 # @FileName: 7.py
 # @Software: PyCharm
-from typing import Annotated
+# from typing import Annotated
 
+from typing_extensions import Annotated
 import uvicorn
 from fastapi import FastAPI, Path, Body
 from pydantic import BaseModel
+from typing import Union
 
 app = FastAPI()
 
 
 class Item(BaseModel):
     name: str
-    description: str | None = None
+    description: Union[str, None] = None
     price: float
-    tax: float | None = None
+    tax: Union[float, None] = None
 
 
 class User(BaseModel):
     username: str
-    fill_name: str | None = None
+    fill_name: Union[str, None] = None
 
 
 @app.put("/items/{item_id}")
